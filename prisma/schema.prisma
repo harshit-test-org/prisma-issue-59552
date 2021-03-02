@@ -1,0 +1,19 @@
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Parent {
+  id      Decimal @id 
+  childId Decimal 
+  child   Child   @relation(fields: [childId], references: [id])
+}
+
+model Child {
+  id     Decimal  @id 
+  Parent Parent[]
+}
